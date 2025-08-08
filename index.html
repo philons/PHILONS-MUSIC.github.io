@@ -88,6 +88,48 @@
       transform: translateY(-3px);
     }
 
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #e0e0e0;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 1001;
+    }
+
+    #hamburger-toggle {
+      display: none;
+    }
+
+    #hamburger-toggle:checked ~ .navbar ul {
+      transform: translateX(0);
+    }
+
+    /* Hamburger Icon Animation */
+    .hamburger span {
+      display: block;
+      width: 30px;
+      height: 3px;
+      background: #e0e0e0;
+      margin: 6px 0;
+      transition: all 0.3s ease;
+    }
+
+    #hamburger-toggle:checked ~ .hamburger span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    #hamburger-toggle:checked ~ .hamburger span:nth-child(2) {
+      opacity: 0;
+    }
+
+    #hamburger-toggle:checked ~ .hamburger span:nth-child(3) {
+      transform: rotate(-45deg) translate(8px, -8px);
+    }
+
     /* Navbar */
     .navbar {
       background: rgba(30, 30, 30, 0.9);
@@ -116,26 +158,6 @@
     .navbar a:hover,
     .navbar a.active {
       color: #f4c430;
-    }
-
-    /* Hamburger Menu */
-    .hamburger {
-      display: none;
-      font-size: 2rem;
-      cursor: pointer;
-      color: #e0e0e0;
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      z-index: 1001;
-    }
-
-    #hamburger-toggle {
-      display: none;
-    }
-
-    #hamburger-toggle:checked ~ ul {
-      transform: translateX(0);
     }
 
     /* Songs Section */
@@ -228,19 +250,32 @@
       margin-bottom: 30px;
     }
 
-    .gallery-container {
+    .gallery-containers {
       max-width: 1200px;
       margin: 0 auto;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .gallery-container-left,
+    .gallery-container-right {
+      flex: 1;
+      max-width: 600px;
       position: relative;
-      height: 400px;
+      min-height: 300px;
+      height: auto;
+      padding: 10px;
+      overflow: hidden;
+      border-radius: 12px;
     }
 
     .gallery-item {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
       opacity: 0;
       visibility: hidden;
       transition: opacity 1s ease, visibility 1s ease;
@@ -254,7 +289,7 @@
     .gallery-item img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       border-radius: 12px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
@@ -274,6 +309,19 @@
     }
 
     /* Responsive Design */
+    @media (max-width: 1024px) {
+      .gallery-containers {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .gallery-container-left,
+      .gallery-container-right {
+        max-width: 100%;
+        min-height: 250px;
+      }
+    }
+
     @media (max-width: 768px) {
       .hero h1 {
         font-size: 2.5rem;
@@ -315,14 +363,15 @@
         font-size: 1.2rem;
       }
 
-      .gallery-container {
-        height: 300px;
-      }
-
       .songs-list th,
       .songs-list td {
         padding: 8px;
         font-size: 0.95rem;
+      }
+
+      .gallery-container-left,
+      .gallery-container-right {
+        min-height: 250px;
       }
     }
 
@@ -345,37 +394,16 @@
         font-size: 1.8rem;
       }
 
-      .gallery-container {
-        height: 200px;
-      }
-
       .songs-list th,
       .songs-list td {
         padding: 6px;
         font-size: 0.9rem;
       }
-    }
 
-    /* Hamburger Icon Animation */
-    .hamburger span {
-      display: block;
-      width: 30px;
-      height: 3px;
-      background: #e0e0e0;
-      margin: 6px 0;
-      transition: all 0.3s ease;
-    }
-
-    #hamburger-toggle:checked ~ .hamburger span:nth-child(1) {
-      transform: rotate(45deg) translate(8px, 8px);
-    }
-
-    #hamburger-toggle:checked ~ .hamburger span:nth-child(2) {
-      opacity: 0;
-    }
-
-    #hamburger-toggle:checked ~ .hamburger span:nth-child(3) {
-      transform: rotate(-45deg) translate(8px, -8px);
+      .gallery-container-left,
+      .gallery-container-right {
+        min-height: 200px;
+      }
     }
   </style>
 </head>
@@ -387,13 +415,13 @@
       <p>Afro Love Beats That Touch the Soul</p>
       <a href="music.html" class="btn">Listen Now</a>
     </div>
+    <input type="checkbox" id="hamburger-toggle" />
+    <label for="hamburger-toggle" class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
     <nav class="navbar">
-      <input type="checkbox" id="hamburger-toggle" />
-      <label for="hamburger-toggle" class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </label>
       <ul>
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="about.html">About</a></li>
@@ -422,8 +450,8 @@
 
   <section class="gallery">
     <h2>Photo Gallery</h2>
-    <div class="gallery-container">
-      <div class="gallery-grid" id="galleryGrid">
+    <div class="gallery-containers">
+      <div class="gallery-container-left" id="galleryLeft">
         <div class="gallery-item">
           <img src="assets/img/photo1.jpg" alt="Philons Photo 1" />
         </div>
@@ -433,6 +461,8 @@
         <div class="gallery-item">
           <img src="assets/img/photo3.jpg" alt="Philons Photo 3" />
         </div>
+      </div>
+      <div class="gallery-container-right" id="galleryRight">
         <div class="gallery-item">
           <img src="assets/img/photo4.jpg" alt="Philons Photo 4" />
         </div>
@@ -448,26 +478,35 @@
   </footer>
 
   <script>
-    // Gallery fade transition
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    let currentIndex = 0;
+    // Gallery fade transition for two containers
+    const leftItems = document.querySelectorAll('#galleryLeft .gallery-item');
+    const rightItems = document.querySelectorAll('#galleryRight .gallery-item');
+    let leftIndex = 0;
+    let rightIndex = 0;
 
-    function showImage(index) {
-      galleryItems.forEach((item, i) => {
+    function showImage(containerItems, index) {
+      containerItems.forEach((item, i) => {
         item.classList.toggle('active', i === index);
       });
     }
 
-    function slideGallery() {
-      currentIndex = (currentIndex + 1) % galleryItems.length;
-      showImage(currentIndex);
+    function slideLeftGallery() {
+      leftIndex = (leftIndex + 1) % leftItems.length;
+      showImage(leftItems, leftIndex);
     }
 
-    // Initialize first image
-    showImage(currentIndex);
+    function slideRightGallery() {
+      rightIndex = (rightIndex + 1) % rightItems.length;
+      showImage(rightItems, rightIndex);
+    }
+
+    // Initialize first images
+    showImage(leftItems, leftIndex);
+    showImage(rightItems, rightIndex);
 
     // Auto-slide every 5 seconds
-    setInterval(slideGallery, 5000);
+    setInterval(slideLeftGallery, 5000);
+    setInterval(slideRightGallery, 5000);
 
     // Songs data
     const songs = [
