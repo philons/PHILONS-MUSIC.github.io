@@ -18,7 +18,7 @@
     /* Base styles */
     body {
       font-family: 'Poppins', sans-serif;
-      background-image: url('assets/img/artist.jpg'); /* Background image */
+      background-image: url('assets/img/artist.jpg');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -31,7 +31,7 @@
     /* Hero Section */
     .hero {
       position: relative;
-      background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(44, 26, 15, 0.9)); /* Semi-transparent overlay */
+      background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(44, 26, 15, 0.9));
       padding: 100px 20px 80px;
       text-align: center;
       overflow: hidden;
@@ -85,12 +85,12 @@
 
     .hero .btn:hover {
       background-color: #cc4a3f;
-      transform: translateY(-11px);
+      transform: translateY(-3px);
     }
 
     /* Navbar */
     .navbar {
-      background: rgba(30, 30, 30, 0.9); /* Semi-transparent for background image visibility */
+      background: rgba(30, 30, 30, 0.9);
       padding: 15px 0;
       position: sticky;
       top: 0;
@@ -118,27 +118,47 @@
       color: #f4c430;
     }
 
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #e0e0e0;
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      z-index: 1001;
+    }
+
+    #hamburger-toggle {
+      display: none;
+    }
+
+    #hamburger-toggle:checked ~ ul {
+      transform: translateX(0);
+    }
+
     /* Songs Section */
     .songs {
       padding: 40px 20px;
-      max-width: 800px;
+      max-width: 1200px;
       margin: 0 auto;
       text-align: center;
-      background-color: rgba(26, 26, 26, 0.9); /* Semi-transparent for readability */
+      background-color: rgba(26, 26, 26, 0.9);
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-      font-family: 'Roboto', sans-serif; /* Modern font for songs section */
+      font-family: 'Roboto', sans-serif;
     }
 
     .songs h2 {
       font-family: 'Montserrat', sans-serif;
-      font-size: 2rem; /* Reduced font size */
+      font-size: 2rem;
       color: #f4c430;
       margin-bottom: 20px;
     }
 
     .songs-summary {
-      font-size: 1rem; /* Reduced font size */
+      font-size: 1rem;
       font-weight: 500;
       color: #e0e0e0;
       margin-bottom: 20px;
@@ -148,33 +168,48 @@
     }
 
     .songs-list {
-      text-align: left;
-      max-width: 600px;
+      max-width: 100%;
       margin: 0 auto;
     }
 
-    .song-item {
-      padding: 15px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      transition: background-color 0.3s ease;
-    }
-
-    .song-item:last-child {
-      border-bottom: none;
-    }
-
-    .song-item:hover {
+    .songs-list table {
+      width: 100%;
+      border-collapse: collapse;
       background-color: rgba(42, 42, 42, 0.9);
+      border-radius: 8px;
+      overflow: hidden;
     }
 
-    .song-item a {
+    .songs-list th,
+    .songs-list td {
+      padding: 12px;
+      text-align: left;
+      font-size: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .songs-list th {
+      background-color: rgba(60, 60, 60, 0.9);
+      font-weight: 600;
+      color: #f4c430;
+    }
+
+    .songs-list td {
+      color: #e0e0e0;
+    }
+
+    .songs-list tr:hover {
+      background-color: rgba(60, 60, 60, 0.9);
+    }
+
+    .songs-list a {
       color: #e65c4f;
       text-decoration: none;
       font-weight: 500;
-      font-size: 1rem; /* Reduced font size */
+      font-size: 1rem;
     }
 
-    .song-item a:hover {
+    .songs-list a:hover {
       color: #f4c430;
       text-decoration: underline;
     }
@@ -182,7 +217,7 @@
     /* Gallery Section */
     .gallery {
       padding: 60px 20px;
-      background-color: rgba(18, 18, 18, 0.9); /* Semi-transparent for readability */
+      background-color: rgba(18, 18, 18, 0.9);
       text-align: center;
     }
 
@@ -196,25 +231,29 @@
     .gallery-container {
       max-width: 1200px;
       margin: 0 auto;
-      overflow: hidden;
       position: relative;
-    }
-
-    .gallery-grid {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
+      height: 400px;
     }
 
     .gallery-item {
-      flex: 0 0 calc(33.33% - 20px);
-      margin: 0 10px;
-      overflow: hidden;
-      border-radius: 12px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1s ease, visibility 1s ease;
+    }
+
+    .gallery-item.active {
+      opacity: 1;
+      visibility: visible;
     }
 
     .gallery-item img {
       width: 100%;
-      height: auto;
+      height: 100%;
       object-fit: cover;
       border-radius: 12px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -250,13 +289,40 @@
         left: 15px;
       }
 
-      .navbar ul {
-        flex-direction: column;
-        gap: 15px;
+      /* Hamburger Menu Styles */
+      .hamburger {
+        display: block;
       }
 
-      .gallery-item {
-        flex: 0 0 calc(50% - 20px);
+      .navbar ul {
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 250px;
+        background: rgba(30, 30, 30, 0.95);
+        padding: 60px 20px 20px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .navbar li {
+        margin: 15px 0;
+      }
+
+      .navbar a {
+        font-size: 1.2rem;
+      }
+
+      .gallery-container {
+        height: 300px;
+      }
+
+      .songs-list th,
+      .songs-list td {
+        padding: 8px;
+        font-size: 0.95rem;
       }
     }
 
@@ -276,12 +342,40 @@
       }
 
       .songs h2 {
-        font-size: 1.8rem; /* Slightly reduced for mobile */
+        font-size: 1.8rem;
       }
 
-      .gallery-item {
-        flex: 0 0 calc(100% - 20px);
+      .gallery-container {
+        height: 200px;
       }
+
+      .songs-list th,
+      .songs-list td {
+        padding: 6px;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Hamburger Icon Animation */
+    .hamburger span {
+      display: block;
+      width: 30px;
+      height: 3px;
+      background: #e0e0e0;
+      margin: 6px 0;
+      transition: all 0.3s ease;
+    }
+
+    #hamburger-toggle:checked ~ .hamburger span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    #hamburger-toggle:checked ~ .hamburger span:nth-child(2) {
+      opacity: 0;
+    }
+
+    #hamburger-toggle:checked ~ .hamburger span:nth-child(3) {
+      transform: rotate(-45deg) translate(8px, -8px);
     }
   </style>
 </head>
@@ -293,123 +387,38 @@
       <p>Afro Love Beats That Touch the Soul</p>
       <a href="music.html" class="btn">Listen Now</a>
     </div>
-
-
+    <nav class="navbar">
+      <input type="checkbox" id="hamburger-toggle" />
+      <label for="hamburger-toggle" class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+      <ul>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="music.html">Music</a></li>
+        <li><a href="videos.html">Videos</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
     <section class="songs">
       <h2>My Songs</h2>
       <div class="songs-summary">
         Completed Songs: <span id="completedCount">32</span>
       </div>
-      <div class="songs-list">
-        <div class="song-item">
-          <a href="assets/audio/song1.mp3"> 1 </a> - Tugenda kuffa
-        </div>
-        <div class="song-item">
-          <a href="assets/audio/song2.mp3">2</a> - First sight
-        </div>
-        <div class="song-item">
-          <a href="assets/audio/song3.mp3"> 3</a> - Treat ft Mbezo
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song1.mp3"> 4 </a> - Gamble
-        </div>
-        <div class="song-item">
-          <a href="assets/audio/song2.mp3">5</a> - Ghetto boy
-        </div>
-        <div class="song-item">
-          <a href="assets/audio/song3.mp3"> 6</a> - Great things
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song1.mp3"> 7 </a> - Lover
-        </div>
-        <div class="song-item">
-          <a href="assets/audio/song2.mp3">8</a> - Another level
-        </div>
-        <div class="song-item">
-          <a href="assets/audio/song3.mp3"> 9</a> - let me love you 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3"> 10</a> - Magician 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3"> 11</a> - Somebody Else 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3"> 12</a> - addicted 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3"> 13</a> - Abundance 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3"> 14</a> - Mapenzi 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3"> 15</a> - Nakulose 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3"> 16</a> - Your body 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3"> 17</a> - Manipulator 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3"> 18</a> - Fake love 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3"> 19</a> - Ghetto queen 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3"> 20</a> - Doctor 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3"> 21</a> - China love 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3">22</a> - Used to 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3"> 23</a> - Love matatu 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3">24</a> - Once upon atime 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3"> 25</a> - Back ina days 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3"> 26</a> - Love martyr 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3"> 27</a> - Future past 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3"> 28</a> - Embaga 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3">29 </a> - Am a african 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3"> 30</a> - Am okay 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3"> 31</a> - One of her kind 
-        </div>
-	<div class="song-item">
-          <a href="assets/audio/song3.mp3"> 32</a> - Holy 
-        </div>
+      <div class="songs-list" id="songsList">
+        <table id="songsTable">
+          <tr>
+            <th>Title</th>
+            <th>Release Date</th>
+            <th>Genre</th>
+          </tr>
+          <!-- Songs will be populated dynamically by JavaScript -->
+        </table>
       </div>
     </section>
   </header>
-
-  <nav class="navbar">
-    <ul>
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="music.html">Music</a></li>
-      <li><a href="videos.html">Videos</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
 
   <section class="gallery">
     <h2>Photo Gallery</h2>
@@ -439,28 +448,77 @@
   </footer>
 
   <script>
-    const galleryGrid = document.getElementById('galleryGrid');
-    const items = document.querySelectorAll('.gallery-item');
-    const totalItems = items.length;
+    // Gallery fade transition
+    const galleryItems = document.querySelectorAll('.gallery-item');
     let currentIndex = 0;
 
-    function slideGallery() {
-      const itemsPerView = 3;
-      const maxIndex = Math.ceil(totalItems / itemsPerView) - 1;
-      currentIndex = (currentIndex + 1) > maxIndex ? 0 : currentIndex + 1;
-      const offset = -currentIndex * (100 / itemsPerView);
-      galleryGrid.style.transform = `translateX(${offset}%)`;
+    function showImage(index) {
+      galleryItems.forEach((item, i) => {
+        item.classList.toggle('active', i === index);
+      });
     }
+
+    function slideGallery() {
+      currentIndex = (currentIndex + 1) % galleryItems.length;
+      showImage(currentIndex);
+    }
+
+    // Initialize first image
+    showImage(currentIndex);
 
     // Auto-slide every 5 seconds
     setInterval(slideGallery, 5000);
 
-    // Ensure gallery starts in correct position
-    galleryGrid.style.transform = 'translateX(0%)';
+    // Songs data
+    const songs = [
+      { title: 'Tugenda kuffa', url: 'assets/audio/song1.mp3', releaseDate: '2023-01-15', genre: 'Afro Love Beat' },
+      { title: 'First sight', url: 'assets/audio/song2.mp3', releaseDate: '2023-03-20', genre: 'Soulful Afro' },
+      { title: 'Treat ft Mbezo', url: 'assets/audio/song3.mp3', releaseDate: '2023-05-10', genre: 'Afro Fusion' },
+      { title: 'Gamble', url: 'assets/audio/song4.mp3', releaseDate: '2023-07-01', genre: 'Afro Pop' },
+      { title: 'Ghetto boy', url: 'assets/audio/song5.mp3', releaseDate: '2023-09-15', genre: 'Afrobeat' },
+      { title: 'Great things', url: 'assets/audio/song6.mp3', releaseDate: '2023-11-20', genre: 'Soulful Afro' },
+      { title: 'Lover', url: 'assets/audio/song7.mp3', releaseDate: '2024-01-10', genre: 'Afro Love Beat' },
+      { title: 'Another level', url: 'assets/audio/song8.mp3', releaseDate: '2024-03-05', genre: 'Afro Fusion' },
+      { title: 'Let me love you', url: 'assets/audio/song9.mp3', releaseDate: '2024-05-15', genre: 'Afro Pop' },
+      { title: 'Magician', url: 'assets/audio/song10.mp3', releaseDate: '2024-07-01', genre: 'Afrobeat' },
+      { title: 'Somebody Else', url: 'assets/audio/song11.mp3', releaseDate: '2024-08-20', genre: 'Soulful Afro' },
+      { title: 'Addicted', url: 'assets/audio/song12.mp3', releaseDate: '2024-09-10', genre: 'Afro Love Beat' },
+      { title: 'Abundance', url: 'assets/audio/song13.mp3', releaseDate: '2024-10-05', genre: 'Afro Fusion' },
+      { title: 'Mapenzi', url: 'assets/audio/song14.mp3', releaseDate: '2024-11-01', genre: 'Afro Pop' },
+      { title: 'Nakulose', url: 'assets/audio/song15.mp3', releaseDate: '2024-12-15', genre: 'Afrobeat' },
+      { title: 'Your body', url: 'assets/audio/song16.mp3', releaseDate: '2025-01-10', genre: 'Soulful Afro' },
+      { title: 'Manipulator', url: 'assets/audio/song17.mp3', releaseDate: '2025-02-01', genre: 'Afro Love Beat' },
+      { title: 'Fake love', url: 'assets/audio/song18.mp3', releaseDate: '2025-02-20', genre: 'Afro Fusion' },
+      { title: 'Ghetto queen', url: 'assets/audio/song19.mp3', releaseDate: '2025-03-05', genre: 'Afro Pop' },
+      { title: 'Doctor', url: 'assets/audio/song20.mp3', releaseDate: '2025-03-15', genre: 'Afrobeat' },
+      { title: 'China love', url: 'assets/audio/song21.mp3', releaseDate: '2025-04-01', genre: 'Soulful Afro' },
+      { title: 'Used to', url: 'assets/audio/song22.mp3', releaseDate: '2025-04-10', genre: 'Afro Love Beat' },
+      { title: 'Love matatu', url: 'assets/audio/song23.mp3', releaseDate: '2025-04-20', genre: 'Afro Fusion' },
+      { title: 'Once upon a time', url: 'assets/audio/song24.mp3', releaseDate: '2025-05-01', genre: 'Afro Pop' },
+      { title: 'Back ina days', url: 'assets/audio/song25.mp3', releaseDate: '2025-05-10', genre: 'Afrobeat' },
+      { title: 'Love martyr', url: 'assets/audio/song26.mp3', releaseDate: '2025-05-20', genre: 'Soulful Afro' },
+      { title: 'Future past', url: 'assets/audio/song27.mp3', releaseDate: '2025-06-01', genre: 'Afro Love Beat' },
+      { title: 'Embaga', url: 'assets/audio/song28.mp3', releaseDate: '2025-06-10', genre: 'Afro Fusion' },
+      { title: 'Am a African', url: 'assets/audio/song29.mp3', releaseDate: '2025-06-20', genre: 'Afro Pop' },
+      { title: 'Am okay', url: 'assets/audio/song30.mp3', releaseDate: '2025-07-01', genre: 'Afrobeat' },
+      { title: 'One of her kind', url: 'assets/audio/song31.mp3', releaseDate: '2025-07-15', genre: 'Soulful Afro' },
+      { title: 'Holy', url: 'assets/audio/song32.mp3', releaseDate: '2025-08-01', genre: 'Afro Love Beat' }
+    ];
 
-    // Update song count dynamically
-    const completedSongs = document.querySelectorAll('.song-item').length;
-    document.getElementById('completedCount').textContent = completedSongs;
+    // Populate songs table
+    const songsTable = document.getElementById('songsTable');
+    songs.forEach(song => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><a href="${song.url}">${song.title}</a></td>
+        <td>${song.releaseDate}</td>
+        <td>${song.genre}</td>
+      `;
+      songsTable.appendChild(tr);
+    });
+
+    // Update song count
+    document.getElementById('completedCount').textContent = songs.length;
   </script>
 </body>
 </html>
