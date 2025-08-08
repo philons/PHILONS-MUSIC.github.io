@@ -4,6 +4,84 @@
   <meta charset="UTF-8" />
   <title>About - Philons</title>
   <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    /* Import Montserrat font for gallery heading */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+    /* Gallery Section */
+    .gallery {
+      padding: 60px 20px;
+      background-color: rgba(18, 18, 18, 0.9);
+      text-align: center;
+      position: relative;
+    }
+
+    .gallery h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      color: #f4c430;
+      margin-bottom: 30px;
+    }
+
+    .gallery-items {
+      max-width: 800px;
+      min-height: 300px;
+      margin: 0 auto;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .gallery-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1s ease, visibility 1s ease;
+    }
+
+    .gallery-item.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery-item img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Responsive Design for Gallery */
+    @media (max-width: 768px) {
+      .gallery h2 {
+        font-size: 2rem;
+      }
+
+      .gallery-items {
+        min-height: 250px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery h2 {
+        font-size: 1.8rem;
+      }
+
+      .gallery-items {
+        min-height: 200px;
+      }
+    }
+  </style>
 </head>
 <body>
   <nav class="navbar">
@@ -21,5 +99,47 @@
     <p>Philons is an exceptionally talented artist who has captured the hearts of music lovers with his unique blend of soulful melodies, thought-provoking lyrics, and captivating performances...</p>
     <p>Born and raised in a small town, Philons discovered his passion for music at a tender age, surrounded by a family of musicians and artists.</p>
   </section>
+  <section class="gallery">
+    <h2>Photo Gallery</h2>
+    <div class="gallery-items" id="gallery">
+      <div class="gallery-item">
+        <img src="assets/img/photo1.jpg" alt="Philons Photo 1" />
+      </div>
+      <div class="gallery-item">
+        <img src="assets/img/photo2.jpg" alt="Philons Photo 2" />
+      </div>
+      <div class="gallery-item">
+        <img src="assets/img/photo3.jpg" alt="Philons Photo 3" />
+      </div>
+      <div class="gallery-item">
+        <img src="assets/img/photo4.jpg" alt="Philons Photo 4" />
+      </div>
+      <div class="gallery-item">
+        <img src="assets/img/photo5.jpg" alt="Philons Photo 5" />
+      </div>
+    </div>
+  </section>
 </body>
+<script>
+  // Gallery fade transition
+  const galleryItems = document.querySelectorAll('#gallery .gallery-item');
+  let currentIndex = 0;
+
+  function showImage(index) {
+    galleryItems.forEach((item, i) => {
+      item.classList.toggle('active', i === index);
+    });
+  }
+
+  function slideGallery() {
+    currentIndex = (currentIndex + 1) % galleryItems.length;
+    showImage(currentIndex);
+  }
+
+  // Initialize first image
+  showImage(currentIndex);
+
+  // Auto-slide every 5 seconds
+  setInterval(slideGallery, 5000);
+</script>
 </html>
