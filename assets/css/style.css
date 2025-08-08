@@ -1,0 +1,168 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #111;
+  color: #fff;
+  line-height: 1.6;
+}
+
+/* Hero section */
+.hero {
+  background-image: url('../img/artist.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 60px 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay h1 {
+  font-size: 4em;
+  font-weight: bold;
+  margin-bottom: 0.3em;
+  color: #ff3366;
+}
+
+.overlay p {
+  font-size: 1.8em;
+  margin-bottom: 1em;
+  color: #eee;
+}
+
+.btn {
+  padding: 12px 24px;
+  background-color: #ff3366;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1em;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #e52d5a;
+}
+
+/* Logo styling */
+.logo-top {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  z-index: 10;
+  background: #000;
+}
+
+/* Navigation bar */
+.navbar {
+  background-color: #000;
+  text-align: center;
+  padding: 15px 0;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.navbar ul li {
+  margin: 0 20px;
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  color: #ff3366;
+}
+
+/* Footer */
+footer {
+  background: #000;
+  padding: 20px;
+  text-align: center;
+  font-size: 0.9em;
+  color: #ccc;
+}
+
+/* Content section */
+.content {
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.content h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #ff3366;
+}
+
+/* Links block */
+.links {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.links a {
+  display: inline-block;
+  background-color: #ff3366;
+  color: white;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 30px;
+  transition: background 0.3s;
+}
+
+.links a:hover {
+  background-color: #e52d5a;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .overlay h1 {
+    font-size: 2.5em;
+  }
+
+  .overlay p {
+    font-size: 1.2em;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+  }
+
+  .navbar ul li {
+    margin: 10px 0;
+  }
+}
