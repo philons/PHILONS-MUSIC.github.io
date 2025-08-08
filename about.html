@@ -24,20 +24,21 @@
     }
 
     .gallery-items {
-      max-width: 800px;
-      min-height: 300px;
+      max-width: 720px;
       margin: 0 auto;
       position: relative;
+      aspect-ratio: 9/16;
       border-radius: 12px;
       overflow: hidden;
+      padding: 10px;
     }
 
     .gallery-item {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
       opacity: 0;
       visibility: hidden;
       transition: opacity 1s ease, visibility 1s ease;
@@ -52,6 +53,7 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
+      aspect-ratio: 9/16;
       border-radius: 12px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
@@ -68,7 +70,7 @@
       }
 
       .gallery-items {
-        min-height: 250px;
+        max-width: 90%;
       }
     }
 
@@ -78,7 +80,7 @@
       }
 
       .gallery-items {
-        min-height: 200px;
+        max-width: 90%;
       }
     }
   </style>
