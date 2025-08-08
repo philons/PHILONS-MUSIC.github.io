@@ -236,69 +236,6 @@
       text-decoration: underline;
     }
 
-    /* Gallery Section */
-    .gallery {
-      padding: 60px 20px;
-      background-color: rgba(18, 18, 18, 0.9);
-      text-align: center;
-    }
-
-    .gallery h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 2.5rem;
-      color: #f4c430;
-      margin-bottom: 30px;
-    }
-
-    .gallery-containers {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-    }
-
-    .gallery-container-left,
-    .gallery-container-right {
-      flex: 1;
-      max-width: 600px;
-      position: relative;
-      min-height: 300px;
-      height: auto;
-      padding: 10px;
-      overflow: hidden;
-      border-radius: 12px;
-    }
-
-    .gallery-item {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      right: 10px;
-      bottom: 10px;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 1s ease, visibility 1s ease;
-    }
-
-    .gallery-item.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      border-radius: 12px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .gallery-item img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    }
-
     /* Footer */
     footer {
       text-align: center;
@@ -309,19 +246,6 @@
     }
 
     /* Responsive Design */
-    @media (max-width: 1024px) {
-      .gallery-containers {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .gallery-container-left,
-      .gallery-container-right {
-        max-width: 100%;
-        min-height: 250px;
-      }
-    }
-
     @media (max-width: 768px) {
       .hero h1 {
         font-size: 2.5rem;
@@ -368,11 +292,6 @@
         padding: 8px;
         font-size: 0.95rem;
       }
-
-      .gallery-container-left,
-      .gallery-container-right {
-        min-height: 250px;
-      }
     }
 
     @media (max-width: 480px) {
@@ -398,11 +317,6 @@
       .songs-list td {
         padding: 6px;
         font-size: 0.9rem;
-      }
-
-      .gallery-container-left,
-      .gallery-container-right {
-        min-height: 200px;
       }
     }
   </style>
@@ -448,66 +362,11 @@
     </section>
   </header>
 
-  <section class="gallery">
-    <h2>Photo Gallery</h2>
-    <div class="gallery-containers">
-      <div class="gallery-container-left" id="galleryLeft">
-        <div class="gallery-item">
-     
-          <img src="assets/img/photo1.jpg" alt="Philons Photo 1" />
-        </div>
-        <div class="gallery-item">
-          <img src="assets/img/photo2.jpg" alt="Philons Photo 2" />
-        </div>
-        <div class="gallery-item">
-          <img src="assets/img/photo3.jpg" alt="Philons Photo 3" />
-        </div>
-        <div class="gallery-item">
-          <img src="assets/img/photo4.jpg" alt="Philons Photo 4" />
-        </div>
-        <div class="gallery-item">
-          <img src="assets/img/photo5.jpg" alt="Philons Photo 5" />
-        </div>
-
-      </div>
-    </div>
-  </section>
-
   <footer>
     <p>&copy; 2025 Philons. All rights reserved.</p>
   </footer>
 
   <script>
-    // Gallery fade transition for two containers
-    const leftItems = document.querySelectorAll('#galleryLeft .gallery-item');
-    const rightItems = document.querySelectorAll('#galleryRight .gallery-item');
-    let leftIndex = 0;
-    let rightIndex = 0;
-
-    function showImage(containerItems, index) {
-      containerItems.forEach((item, i) => {
-        item.classList.toggle('active', i === index);
-      });
-    }
-
-    function slideLeftGallery() {
-      leftIndex = (leftIndex + 1) % leftItems.length;
-      showImage(leftItems, leftIndex);
-    }
-
-    function slideRightGallery() {
-      rightIndex = (rightIndex + 1) % rightItems.length;
-      showImage(rightItems, rightIndex);
-    }
-
-    // Initialize first images
-    showImage(leftItems, leftIndex);
-    showImage(rightItems, rightIndex);
-
-    // Auto-slide every 5 seconds
-    setInterval(slideLeftGallery, 5000);
-    setInterval(slideRightGallery, 5000);
-
     // Songs data
     const songs = [
       { title: 'Tugenda kuffa', url: 'assets/audio/song1.mp3', releaseDate: '2023-01-15', genre: 'Afro Love Beat' },
